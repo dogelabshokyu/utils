@@ -32,7 +32,7 @@ virt
 
 START_TIME=$(date +%s)
 
-CHECK_TAG=$(./dotfiles/bin/best_kernel "*8064.0" | grep TAG:)
+CHECK_TAG=$(./dotfiles/bin/best_kernel "$caf_tag" | grep TAG:)
 CAF_TAG="${CHECK_TAG:5}"
 echo $CAF_TAG > best_caf_kernel.txt
 
@@ -41,7 +41,6 @@ mkdir diff_log
 for i in $list
 do
 	git diff tags/$CAF_TAG --word-diff $i 2>&1 | tee diff_log/$i.log
-	#mv diff_log.txt diff_log/diff-$i.txt
 done
 
 echo "work end : $(($(date +%s)- $START_TIME))"
